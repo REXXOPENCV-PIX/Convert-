@@ -19,6 +19,8 @@ Variabel lain:
 - `WEBHOOK_DOMAIN`: domain publik lengkap, misal `https://example.com`
 - `WEBHOOK_PATH`: path endpoint webhook, default `/telegraf/<WEBHOOK_SECRET>`
 - `WEBHOOK_SECRET`: secret untuk membentuk path default jika `WEBHOOK_PATH` tidak disetel
+ - `ADMIN_IDS`: daftar ID admin (dipisahkan koma), gunakan chat id numerik
+ - `BC_RATE`: batas laju broadcast (pesan/detik), default 20
 
 ## Langkah Menjalankan (Polling)
 1. `npm install`
@@ -38,3 +40,14 @@ Jika `BOT_TOKEN` belum diisi, aplikasi akan menampilkan pesan dan keluar tanpa e
 
 ## Catatan
 - Untuk menguji, kirim pesan ke bot Anda di Telegram. Bot akan meng-echo kembali teks yang Anda kirim dan mendukung perintah `/start`, `/help`, `/ping`, dan `/about`.
+
+## Fitur & Logika
+- Perintah dasar: `/start`, `/help`, `/ping`, `/about`
+- Berlangganan: `/subscribe` untuk opt-in, `/unsubscribe` untuk opt-out
+- Pencatatan pengguna: setiap interaksi menyimpan/ memperbarui `data/users.json`
+- Admin Panel (`/admin`, private chat, admin saja):
+  - Broadcast: admin pilih "📣 Broadcast", lalu kirim pesan apa pun (teks/foto/dll). Bot akan minta konfirmasi sebelum siaran ke semua subscriber menggunakan `copyMessage`.
+  - Stats: melihat total user, jumlah subscriber, dan waktu broadcast terakhir
+  - Close: menutup panel admin
+- Broadcast: dibatasi laju kirim (`BC_RATE`, default 20 msg/detik), kegagalan karena blokir/Chat tidak ditemukan akan menandai user sebagai `unsubscribed`.
+- Health endpoint: `GET /healthz` menampilkan status ok dan jumlah user yang tersimpan.
