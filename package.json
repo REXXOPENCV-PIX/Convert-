@@ -1,0 +1,17 @@
+{
+  "name": "convert-telegram-bot",
+  "version": "0.1.0",
+  "description": "Minimal Telegram bot using Telegraf",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "telegraf": "^4.16.3"
+  }
+}
