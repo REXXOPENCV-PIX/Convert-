@@ -1,0 +1,1 @@
+python-telegram-bot==21.6\npython-dotenv==1.0.1\nopenpyxl==3.1.5\nphonenumberslite==8.13.48\nvcfpy==0.13.6\npandas==2.2.2\npyyaml==6.0.2
